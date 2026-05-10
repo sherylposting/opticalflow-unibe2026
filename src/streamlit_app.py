@@ -472,16 +472,38 @@ with tab_app:
             "reference (t). Compare it with the raw moving frame to see how much the "
             "warp corrected the shift."
         )
-        nr, nc = r["shape"]
-        display_w = min(320, nc)
 
-        col1, col2, col3 = st.columns(3)
-        with col1:
-            st.image(r["frame0"],   caption="Reference (t)",                        width=display_w)
-        with col2:
-            st.image(r["frame1"],   caption="Moving (t+1) — unregistered",          width=display_w)
-        with col3:
-            st.image(r["warp_rgb"], caption="Registered (t+1 → t) — warped output", width=display_w, clamp=True)
+        def img_to_b64(arr):
+            import base64, io
+            from PIL import Image
+            if arr.dtype != np.uint8:
+                arr = (np.clip(arr, 0, 1) * 255).astype(np.uint8)
+            if arr.ndim == 2:
+                arr = np.stack([arr, arr, arr], axis=-1)
+            buf = io.BytesIO()
+            Image.fromarray(arr).save(buf, format="PNG")
+            return base64.b64encode(buf.getvalue()).decode()
+
+        b64_ref  = img_to_b64(r["frame0"])
+        b64_mov  = img_to_b64(r["frame1"])
+        b64_warp = img_to_b64(r["warp_rgb"])
+
+        st.html(f"""
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;width:100%;">
+          <div style="text-align:center;">
+            <img src="data:image/png;base64,{b64_ref}"  style="width:100%;height:auto;display:block;">
+            <p style="margin:4px 0 0;font-size:0.82rem;color:#888;">Reference (t)</p>
+          </div>
+          <div style="text-align:center;">
+            <img src="data:image/png;base64,{b64_mov}"  style="width:100%;height:auto;display:block;">
+            <p style="margin:4px 0 0;font-size:0.82rem;color:#888;">Moving (t+1) — unregistered</p>
+          </div>
+          <div style="text-align:center;">
+            <img src="data:image/png;base64,{b64_warp}" style="width:100%;height:auto;display:block;">
+            <p style="margin:4px 0 0;font-size:0.82rem;color:#888;">Registered (t+1 → t) — warped output</p>
+          </div>
+        </div>
+        """)
 
         # ── Registration comparison ────────────────────────────────────
         st.subheader("Registration: Color-Bleed Overlay")
@@ -519,11 +541,18 @@ with tab_app:
                 "Install `streamlit-image-comparison` for an interactive drag slider. "
                 "Showing static side-by-side instead."
             )
-            col1, col2 = st.columns(2)
-            with col1:
-                st.image(r["frame1"],   caption="Moving — before registration",   width=display_w)
-            with col2:
-                st.image(r["warp_rgb"], caption="Registered — after registration", width=display_w)
+            st.html(f"""
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;">
+              <div style="text-align:center;">
+                <img src="data:image/png;base64,{b64_mov}"  style="width:100%;height:auto;display:block;">
+                <p style="margin:4px 0 0;font-size:0.82rem;color:#888;">Moving — before registration</p>
+              </div>
+              <div style="text-align:center;">
+                <img src="data:image/png;base64,{b64_warp}" style="width:100%;height:auto;display:block;">
+                <p style="margin:4px 0 0;font-size:0.82rem;color:#888;">Registered — after registration</p>
+              </div>
+            </div>
+            """)
 
         # ── Residual error maps ────────────────────────────────────────
         st.subheader("Residual Error Maps")
