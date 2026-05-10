@@ -472,19 +472,16 @@ with tab_app:
             "reference (t). Compare it with the raw moving frame to see how much the "
             "warp corrected the shift."
         )
-        
         nr, nc = r["shape"]
-        # Fixed display width per column — avoids layout jitter on re-render
         display_w = min(320, nc)
-        
+
         col1, col2, col3 = st.columns(3)
         with col1:
-            st.image(r["frame0"],   caption="Reference (t)",               width=display_w)
+            st.image(r["frame0"],   caption="Reference (t)",                        width=display_w)
         with col2:
-            st.image(r["frame1"],   caption="Moving (t+1) — unregistered", width=display_w)
+            st.image(r["frame1"],   caption="Moving (t+1) — unregistered",          width=display_w)
         with col3:
-            st.image(r["warp_rgb"], caption="Registered (t+1 → t) — warped output",
-                     width=display_w, clamp=True)
+            st.image(r["warp_rgb"], caption="Registered (t+1 → t) — warped output", width=display_w, clamp=True)
 
         # ── Registration comparison ────────────────────────────────────
         st.subheader("Registration: Color-Bleed Overlay")
@@ -523,8 +520,10 @@ with tab_app:
                 "Showing static side-by-side instead."
             )
             col1, col2 = st.columns(2)
-            col1.image(r["frame1"],   caption="Moving — before registration",   use_container_width=True)
-            col2.image(r["warp_rgb"], caption="Registered — after registration", use_container_width=True)
+            with col1:
+                st.image(r["frame1"],   caption="Moving — before registration",   width=display_w)
+            with col2:
+                st.image(r["warp_rgb"], caption="Registered — after registration", width=display_w)
 
         # ── Residual error maps ────────────────────────────────────────
         st.subheader("Residual Error Maps")
