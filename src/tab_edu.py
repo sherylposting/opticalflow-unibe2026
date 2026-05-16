@@ -24,7 +24,7 @@ def render():
     (R,T)= \underset{R,T}{\operatorname{argmin}} \frac{1}{N}\sum_{i=1}^N{||Rx_i+T-y_i||^2}
     $$
     """, unsafe_allow_html=True)
-    st.image("../figures/icp.gif", width=300)
+    st.image("https://github.com/sherylposting/data/blob/main/opticalflow/icp.gif?raw=true", width=300)
 
     st.header("What optical flow computes")
     st.write(
