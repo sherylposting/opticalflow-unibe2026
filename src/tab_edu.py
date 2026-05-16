@@ -4,12 +4,7 @@ import streamlit as st
 def render():
     st.header("What is image registration?")
     st.write(
-        "**Image registration** is the process of mapping a target (or 'moving') image to a reference (or 'fixed') image, such that the corresponding structures in the images are aligned to each other. It is an optimization problem where we must find a geometric transformation which minimizes the displacement between the two images."
-    )
-    st.write(
-        "Suppose you have two frames from a video. Between them, something moved, and you want to track its trajectory. For each pixel in frame A, registration attempts to guess where it ended up in frame B. Once you know that, you can warp frame B back onto frame A to align the two frames. " \
-    )
-    st.write(
+        "**Image registration** is the process of mapping a target (or 'moving') image to a reference (or 'fixed') image, such that the corresponding structures in the images are aligned to each other. It is an optimization problem where we must find a geometric transformation which minimizes the displacement between the two images. "
         "While many uses of image registration include stabilizing accidental movements, or aligning multiple imaging modalities (ex. a fluorescent marker overlaid on MRI), **registration can also allow us to track the movement of objects**."
     )
 
@@ -55,7 +50,7 @@ def render():
             "Assumes brightness is locally constant within a window of radius *r* "
             "around each pixel, then solves a least-squares system for the local "
             "velocity. Iterating and coarsening the pyramid extends its range. "
-            "Struggles with large displacements.$^1$"
+            "iLK struggles with large displacements.$^1$"
         )
         st.latex(r'''
         \sum_{x,y\in\Omega}W^2(x,y)\ (\nabla g \cdot \vec{u}+g-f)^2=0 \\
@@ -86,7 +81,7 @@ def render():
         st.write(
             "The registered frame is the result of warping the moving frame (t+1) onto the "
             "reference frame (t) using the estimated displacement field. It should look like "
-            "the reference — structures that were shifted, rotated, or deformed are moved back "
+            "the reference; structures that were shifted, rotated, or deformed will be moved back "
             "into alignment. Compare it side-by-side with the raw moving frame to see how much "
             "the warp corrected."
         )
@@ -95,7 +90,7 @@ def render():
         st.write(
             "The fixed frame is placed in the **green and blue channels** (cyan), "
             "the moving frame in the **red channel**. Where the two frames disagree spatially "
-            "you see red or cyan fringing — like misaligned colour printing. "
+            "you see red or cyan fringing, like misaligned colour printing. "
             "After registration the warp brings the frames into alignment and the fringing collapses to grey."
         )
 
