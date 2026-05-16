@@ -1,19 +1,3 @@
----
-title: Opticalflow
-emoji: 🚀
-colorFrom: red
-colorTo: red
-sdk: docker
-app_port: 8501
-tags:
-- streamlit
-pinned: false
-short_description: Streamlit template space
----
+Try my live app deployed here! https://huggingface.co/spaces/sheryllin/opticalflow
 
-# Welcome to Streamlit!
-
-Edit `/src/streamlit_app.py` to customize this app to your heart's desire. :heart:
-
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
+<img width="1316" height="450" alt="03e7ead9c8ccb531c0a30a4b4fb51e7af4fdf2f2e415c70b49b024a4" src="https://github.com/user-attachments/assets/dda8cad9-d796-4c14-80f0-5926dc26dbdb" />
