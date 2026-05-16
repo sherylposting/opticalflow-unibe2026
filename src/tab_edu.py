@@ -28,7 +28,7 @@ def render():
 
     st.header("What optical flow computes")
     st.write(
-        "**Optical flow** is an example of a **non-linear image registration** method, which can apply an elastic transformation across the image instead of being limited to linear transformations. It estimates a vector field **u(x,y), v(x,y)**, with one 2D displacement vector per pixel. The vector at each location says: the content here moved Δx pixels horizontally and Δy pixels vertically. Together, these vectors form the displacement field or warp field."
+        "**Optical flow** is an example of a **non-linear image registration** method, which can apply an elastic transformation across the image instead of being limited to linear transformations. It estimates a vector field **u(x,y), v(x,y)**, with one 2D displacement vector per pixel. The vector at each location says: the content here moved Δx pixels horizontally and Δy pixels vertically. Together, these vectors form the displacement field or warp field. Typically, when people use optical flow, they only care about retrieving this vector field for motion-tracking purposes, but it can also be used for stabilization (like this app does)."
     )
     st.markdown("""
         In order to work, optical flow makes some important assumptions (which may limit its performance if you don't accommodate them!):
