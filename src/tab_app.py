@@ -151,7 +151,7 @@ def render():
     # ----------------------------
     # Processing
     # ----------------------------
-    if st.button("🎬 Process Selected Range", type="primary"):
+    if st.button("Process selected range", type="primary"):
 
         progress_bar = st.progress(0)
         status = st.empty()
@@ -317,7 +317,7 @@ def render():
             )
             sm.set_array([])
             plt.colorbar(sm, ax=axes[1], fraction=0.046, pad=0.04, label="displacement (px)")
-        axes[1].set_title("After registration  (fringing reduced)")
+        axes[1].set_title("After registration (fringing reduced)")
         axes[1].axis("off")
         plt.tight_layout()
         return fig
@@ -485,7 +485,7 @@ def render():
         # ── Play video ─────────────────────────────────────────────────
         st.subheader("Optical Flow Animation")
         st.caption(
-            "Each frame shows: **fixed (the target to match to) · moving (unregistered frame) · registered (t→t=0).** Plays at 8 fps. "
+            "Each frame shows: **fixed (the target to match to), moving (unregistered frame), registered (t→t=0).** Plays at 8 fps. "
             "Try looking at the optical flow vector field by checking 'Show Vector Field' on the sidebar! "
             "Vector colours encode displacement magnitude (blue = small, yellow = large). "
         )
