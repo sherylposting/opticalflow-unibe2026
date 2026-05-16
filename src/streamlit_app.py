@@ -58,4 +58,4 @@ with tab2_ui:
 with tab3_ui:
     tab_slides.render()
 
-st.write("This app was partially vibe-coded using Claude AI*")
+st.write("*This app was partially vibe-coded using Claude AI*")
