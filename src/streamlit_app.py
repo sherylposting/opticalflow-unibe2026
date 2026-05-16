@@ -57,3 +57,5 @@ with tab2_ui:
     tab_edu.render()
 with tab3_ui:
     tab_slides.render()
+
+st.write("This app was partially vibe-coded using Claude AI*")
