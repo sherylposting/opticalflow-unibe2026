@@ -48,8 +48,7 @@ def render():
         st.markdown("**iLK (Iterative Lucas-Kanade)**")
         st.write(
             "Assumes brightness is locally constant within a window of radius *r* "
-            "around each pixel, then solves a least-squares system for the local "
-            "velocity. Iterating and coarsening the pyramid extends its range. "
+            "around each pixel. By including a larger window of pixels, it creates an overdetermined system, which we can then solve using least-squares for the local displacement vector. "
             "iLK struggles with large displacements.$^1$"
         )
         st.latex(r'''
